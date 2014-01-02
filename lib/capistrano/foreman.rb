@@ -1,1 +1,1 @@
-load File.expand_path('../tasks/bundler.cap', __FILE__)
+load File.expand_path('../tasks/foreman.cap', __FILE__)
