@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'capistrano/foreman/version'
+require 'capistrano-foreman'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'capistrano-foreman'
+  spec.name          = 'capistrano3-foreman'
   spec.version       = Capistrano::Foreman::VERSION
   spec.authors       = ['Stefan Surzycki']
   spec.email         = ['stefan.surzycki@gmail.com']
   spec.description   = %q{Foreman support for Capistrano 3.x}
   spec.summary       = %q{Foreman support for Capistrano 3.x}
-  spec.homepage      = 'https://github.com/capistrano/bundler'
+  spec.homepage      = 'https://github.com/surzycki/capistrano-foreman'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
