@@ -1,16 +1,14 @@
 namespace :foreman do
   desc 'Export the Procfile to Ubuntu upstart scripts'
   task :export do
-    puts "hu"
-    #on roles(:app) do |host|
-    #  within current_path do
-    #    as :root do
-    #      execute :mkdir, "-p #{fetch(:log_directory)}"
-    #      execute :chown, "-R #{host.user}: #{fetch(:log_directory)}"
-    #      execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{fetch(:log_directory)}"
-    #    end
-    #  end
-    #end
+    on roles(:app) do |host|
+      log_path = shared_path.join('log')
+      within current_path do
+        as :root do
+          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path}"
+        end
+      end
+    end
   end
 
   desc 'Start the application services'
@@ -39,4 +37,6 @@ namespace :foreman do
       end
     end
   end
+
+  before 'deploy:restart', 'foreman:export'
 end

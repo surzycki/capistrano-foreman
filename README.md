@@ -1,12 +1,12 @@
 # Capistrano::Foreman
 
-TODO: Write a gem description
+Capistrano V3 for foreman
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-foreman'
+    gem 'capistrano3-foreman'
 
 And then execute:
 
@@ -14,11 +14,22 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install capistrano-foreman
+    $ gem install capistrano3-foreman
 
 ## Usage
 
-TODO: Write usage instructions here
+Require in Capfile to use the default task:
+
+    require 'capistrano/foreman'
+
+
+**Export Procfile to upstart**
+
+This task will be run before `deploy:restart` as part of Capistrano's default deploy, or can be run in isolation with:
+
+    cap production foreman:export
+
+
 
 ## Contributing
 
