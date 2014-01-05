@@ -38,5 +38,5 @@ namespace :foreman do
     end
   end
 
-  before 'deploy:restart', 'foreman:export'
+  before 'deploy:publishing', 'foreman:export'
 end
