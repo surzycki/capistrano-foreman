@@ -42,7 +42,12 @@ In order for foreman to export to upstart your deploy user must have `sudoer` pr
 
 Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/foreman/#ENVIRONMENT). 
 
-    set :foreman_env,  '/remote/path/to/your.env'         # Default none     
+    set :foreman_env,  '/remote/path/to/your.env'         # Default none 
+
+
+## Build your own mini Heroku ## 
+
+Coming soon   
 
 ## Contributing
 
