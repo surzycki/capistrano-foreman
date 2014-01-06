@@ -27,7 +27,7 @@ Require in Capfile to use the default task:
     require 'capistrano/foreman'
 
 
-**Export Procfile to upstart**
+###Export Procfile to upstart###
 
 This task will be run before `deploy:restart` as part of Capistrano's default deploy, or can be run in isolation with:
 
@@ -36,6 +36,13 @@ This task will be run before `deploy:restart` as part of Capistrano's default de
 **NOTE** 
 
 In order for foreman to export to upstart your deploy user must have `sudoer` privileges 
+
+
+###Options##
+
+Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/foreman/#ENVIRONMENT). 
+
+    set :foreman_env,  '/remote/path/to/your.env'         # Default none     
 
 ## Contributing
 
