@@ -2,6 +2,10 @@
 
 Capistrano V3 for foreman
 
+## WIP
+
+There be dragons, proceed at your own risk.
+
 ## Installation
 
 Add this line to your application's Gemfile:
