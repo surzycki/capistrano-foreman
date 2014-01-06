@@ -3,7 +3,7 @@ namespace :foreman do
   task :export do
     on roles(:app) do |host|
       log_path = shared_path.join('log')
-      within current_path do
+      within release_path do
         as :root do
           execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path}"
         end
