@@ -33,7 +33,9 @@ This task will be run before `deploy:restart` as part of Capistrano's default de
 
     cap production foreman:export
 
+**NOTE** 
 
+In order for foreman to export to upstart your deploy user must have `sudoer` privileges 
 
 ## Contributing
 

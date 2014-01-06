@@ -2,10 +2,12 @@ namespace :foreman do
   desc 'Export the Procfile to Ubuntu upstart scripts'
   task :export do
     on roles(:app) do |host|
-      log_path = shared_path.join('log')
+      log_path         = shared_path.join('log')
+      environment_path = fetch(:foreman_env) 
+      
       within release_path do
         as :root do
-          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path}"
+          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
         end
       end
     end
