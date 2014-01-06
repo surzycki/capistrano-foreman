@@ -2,6 +2,8 @@
 
 Capistrano V3 for foreman
 
+[![Gem Version](https://badge.fury.io/rb/capistrano3-foreman.png)](http://badge.fury.io/rb/capistrano3-foreman)
+
 ## WIP
 
 There be dragons, proceed at your own risk.
