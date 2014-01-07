@@ -1,8 +1,8 @@
 # Capistrano::Foreman
 
-Capistrano V3 for foreman
-
 [![Gem Version](https://badge.fury.io/rb/capistrano3-foreman.png)](http://badge.fury.io/rb/capistrano3-foreman)
+
+Capistrano V3 for foreman
 
 ## WIP
 
@@ -47,9 +47,38 @@ Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/f
     set :foreman_env,  '/remote/path/to/your.env'         # Default none 
 
 
-## Build your own mini Heroku ## 
+## The Twelve Factor App ## 
 
-Coming soon   
+[(Treat backing services as attached resources)](http://12factor.net/backing-services) by using ENV variables for your configuration.
+
+**database.yml**
+
+    default: &default
+      adapter: mysql2
+      host: <%= ENV['DATABASE_HOST'] %>
+      username: <%= ENV['DATABASE_USERNAME'] %>
+      password: <%= ENV['DATABASE_PASSWORD'] %>
+      encoding: utf8
+      reconnect: true
+    
+    staging:
+      <<: *default
+      database: app_web_staging
+    
+    production:
+      <<: *default
+      database: app_web_production
+
+**deploy.rb**
+
+    set :foreman_env,     '/home/deploy/.pam_environment'
+
+**.pam_environment**
+
+    DATABASE_HOST=database.example.com
+    DATABASE_USERNAME=user
+    DATABASE_PASSWORD=password
+    RAILS_ENV=staging
 
 ## Contributing
 
