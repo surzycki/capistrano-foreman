@@ -40,7 +40,7 @@ This task will be run before `deploy:restart` as part of Capistrano's default de
 In order for foreman to export to upstart your deploy user must have `sudoer` privileges 
 
 
-###Options##
+###Options###
 
 Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/foreman/#ENVIRONMENT). 
 
