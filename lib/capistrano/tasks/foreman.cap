@@ -3,12 +3,10 @@ namespace :foreman do
   task :export do
     on roles(:app) do |host|
       log_path         = shared_path.join('log')
-      environment_path = fetch(:foreman_env) 
-      
+      environment_path = fetch(:foreman_env)
+
       within release_path do
-        as :root do
-          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
-        end
+        sudo :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
       end
     end
   end
@@ -16,27 +14,21 @@ namespace :foreman do
   desc 'Start the application services'
   task :start do
     on roles(:app) do |host|
-      as :root do
-        execute :start, fetch(:application)
-      end
+      sudo :start, fetch(:application)
     end
   end
 
   desc 'Stop the application services'
   task :stop do
     on roles(:app) do |host|
-      as :root do
-        execute :stop, fetch(:application)
-      end
+      sudo :stop, fetch(:application)
     end
   end
 
   desc 'Restart the application services'
   task :restart do
     on roles(:app) do |host|
-      as :root do
-        execute :service, "#{fetch(:application)} start || service #{fetch(:application)} restart"
-      end
+      sudo :service, "#{fetch(:application)} start || service #{fetch(:application)} restart"
     end
   end
 
