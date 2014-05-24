@@ -3,11 +3,11 @@ namespace :foreman do
   task :export do
     on roles(:app) do |host|
       log_path         = shared_path.join('log')
-      environment_path = fetch(:foreman_env) 
-      
+      environment_path = fetch(:foreman_env)
+
       within release_path do
         as :root do
-          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
+          execute "#{fetch(:foreman_prefix)} foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
         end
       end
     end
@@ -41,4 +41,10 @@ namespace :foreman do
   end
 
   before 'deploy:publishing', 'foreman:export'
+end
+
+namespace :load do
+  task :defaults do
+    set :foreman_prefix, 'bundle exec'
+  end
 end
