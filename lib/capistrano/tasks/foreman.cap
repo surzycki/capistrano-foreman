@@ -1,13 +1,14 @@
 namespace :foreman do
   desc 'Export the Procfile to Ubuntu upstart scripts'
   task :export do
-    on roles(:app) do |host|
-      log_path         = shared_path.join('log')
-      environment_path = fetch(:foreman_env) 
-      
+    on roles(fetch(:foreman_roles)) do |host|
+      log_path         = fetch(:foreman_log_path)
+      user             = fetch(:foreman_user) || host.user
+      environment_path = fetch(:foreman_env)
+
       within release_path do
         as :root do
-          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
+          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:foreman_application)} -u #{user} -l #{log_path} -e #{environment_path}"
         end
       end
     end
@@ -15,30 +16,41 @@ namespace :foreman do
 
   desc 'Start the application services'
   task :start do
-    on roles(:app) do |host|
+    on roles(fetch(:foreman_roles)) do |host|
       as :root do
-        execute :start, fetch(:application)
+        execute :start, fetch(:foreman_application)
       end
     end
   end
 
   desc 'Stop the application services'
   task :stop do
-    on roles(:app) do |host|
+    on roles(fetch(:foreman_roles)) do |host|
       as :root do
-        execute :stop, fetch(:application)
+        execute :stop, fetch(:foreman_application)
       end
     end
   end
 
   desc 'Restart the application services'
   task :restart do
-    on roles(:app) do |host|
+    on roles(fetch(:foreman_roles)) do |host|
       as :root do
-        execute :service, "#{fetch(:application)} start || service #{fetch(:application)} restart"
+        execute :service, "#{fetch(:foreman_application)} start || service #{fetch(:foreman_application)} restart"
       end
     end
   end
 
   before 'deploy:publishing', 'foreman:export'
+end
+
+
+namespace :load do
+  task :defaults do
+    set :foreman_roles, %w(app)
+    set :foreman_application, -> { fetch(:application) }
+    set :foreman_user, nil
+    set :foreman_log_path, -> { shared_path.join('log') }
+    set :foreman_env, nil
+  end
 end
