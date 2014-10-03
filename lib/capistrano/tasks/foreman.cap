@@ -4,10 +4,12 @@ namespace :foreman do
     on roles(:app) do |host|
       log_path         = shared_path.join('log')
       environment_path = fetch(:foreman_env) 
+      location         = fetch(:foreman_location, '/etc/init') 
+      foreman_user     = fetch(:foreman_export_user, :root)
       
       within release_path do
-        as :root do
-          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
+        as foreman_user do
+          execute :bundle, "exec foreman export upstart #{location} -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
         end
       end
     end
