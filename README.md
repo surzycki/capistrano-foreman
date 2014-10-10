@@ -54,6 +54,10 @@ Use other user than `root` (the default) to run `bundle exec foreman export` whe
 
     set :foreman_export_user, 'my_user'
 
+Specify the name of the service using `foreman_service_name`:
+
+    set :foreman_service_name, 'my/application'
+
 
 ##The Twelve Factor App##
 
