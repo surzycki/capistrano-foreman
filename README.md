@@ -44,7 +44,11 @@ In order for foreman to export to upstart your deploy user must have `sudoer` pr
 
 Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/foreman/#ENVIRONMENT). 
 
+```
     set :foreman_env,  '/remote/path/to/your.env'         # Default none 
+    set :application_port, 5000  # The port foreman should bind on for
+your application
+```
 
 
 ##The Twelve Factor App##
