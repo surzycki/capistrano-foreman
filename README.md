@@ -50,6 +50,12 @@ Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/f
 your application
 ```
 
+Set your export hooks:
+
+```
+after 'deploy:symlink:release', 'foreman:export'
+```
+
 
 ##The Twelve Factor App##
 
