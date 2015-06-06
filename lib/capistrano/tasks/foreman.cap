@@ -35,7 +35,7 @@ namespace :foreman do
   task :restart do
     on roles(:app) do |host|
       as :root do
-        execute :service, "#{fetch(:application)} start || service #{fetch(:application)} restart"
+        execute :service, "#{fetch(:application)} restart || service #{fetch(:application)} start"
       end
     end
   end
